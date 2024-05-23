@@ -1,9 +1,8 @@
-﻿#include <iostream>
-#include <vector>
+#include <iostream>
 
-void sortArray(std::vector<int>& arr) {
-    for (int i = 0; i < arr.size() - 1; ++i) {
-        for (int j = 0; j < arr.size() - i - 1; ++j) {
+void sortArray(int* arr, int size) {
+    for (int i = 0; i < size - 1; ++i) {
+        for (int j = 0; j < size - i - 1; ++j) {
             if (arr[j] > arr[j + 1]) {
                 int temp = arr[j];
                 arr[j] = arr[j + 1];
@@ -18,23 +17,29 @@ int main() {
     std::cout << "Enter an integer: ";
     std::cin >> n;
 
-    std::vector<int> digits;
-    while (n != 0) {
-        digits.push_back(n % 10);
-        n /= 10;
+
+    int digits[20];
+    int size = 0;
+
+
+    long long temp = n;
+    while (temp != 0) {
+        digits[size++] = temp % 10;
+        temp /= 10;
     }
 
     std::cout << "Original array: ";
-    for (auto it = digits.rbegin(); it != digits.rend(); ++it) {
-        std::cout << *it << " ";
+    for (int i = size - 1; i >= 0; --i) {
+        std::cout << digits[i] << " ";
     }
     std::cout << std::endl;
 
-    sortArray(digits);
+
+    sortArray(digits, size);
 
     std::cout << "Sorted array: ";
-    for (int digit : digits) {
-        std::cout << digit << " ";
+    for (int i = 0; i < size; ++i) {
+        std::cout << digits[i] << " ";
     }
     std::cout << std::endl;
 
